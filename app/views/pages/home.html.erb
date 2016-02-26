@@ -1,0 +1,31 @@
+<%= javascript_tag do %>
+  window.board_data = <%= raw JSON.generate @board_data %>
+<% end %>
+
+<div id="header">
+  <span class="title"><%=@board.name%></span>
+  <i class="menu glyphicon glyphicon-menu-hamburger"></i>
+</div>
+<div id="content">
+  <div id="board">
+      <% @board_data.each_with_index do |category, c_idx| %>
+        <div class="column">
+          <div class="category" data-category-id="<%= c_idx %>"><%= category["name"] %></div>
+          <% category["questions"].each_with_index do |question, q_idx| %>
+            <div class="question" data-category-id="<%= c_idx %>" data-question-id="<%= q_idx %>">$ <%= question["value"] %></div>
+          <% end %>
+        </div>
+      <% end %>
+  </div>
+</div>
+<div id="footer">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="questionModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="questionTitle">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body question-body"></div>
+    </div>
+  </div>
+</div>

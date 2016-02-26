@@ -1,0 +1,89 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.modal-body {
+  min-height: 300px;
+  background-color: #333333;
+  color: #EEEEEE;
+  padding: 20px;
+  text-align: center;
+  font-size: 48px;
+}
+.modal-body:hover {
+  cursor: pointer;
+}
+
+.modal .modal-dialog {
+  margin: 10px 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .modal .modal-dialog {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .modal .modal-dialog {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .modal .modal-dialog {
+     width: 1170px;
+  }
+}
+
+#header {
+  margin: 5px;
+  font-size: 24px;
+  text-align: center;
+
+  .menu {
+    float: right;
+  }
+}
+
+#content {
+  min-height: 100%;
+
+  #board {
+    color: #EEEEEE;
+    font-size: 24px;
+    line-height: 80px;
+    text-align: center;
+    .clear {clear: both;}
+
+    .column {
+      float: left;
+      padding: 0;
+      margin: 0;
+      width: 16.6666667%;
+      width: -webkit-calc(100% / 6);
+      width: calc(100% / 6);
+      height: 100%;
+      .category, .question {
+        border: 1px solid #EEE;
+        min-height: 80px;
+      }
+      .category {
+        background-color: #111155;
+      }
+      .question {
+        background-color: #000033;
+      }
+      .question.answered {
+        background-color: #333366;
+        text-decoration: line-through;
+        color: #999
+      }
+      .question:hover {
+        background-color: #000066;
+        cursor: pointer;
+      }
+    }
+  }
+
+}
