@@ -3,21 +3,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 showQuestion = (catNum, qNum) ->
-  $(".question-body").data("category-id", catNum)
-  $(".question-body").data("question-id", qNum)
+  qDiv = $(".question-body")
+  qDiv.data("category-id", catNum)
+  qDiv.data("question-id", qNum)
   question = window.board_data[catNum].questions[qNum]
   $("#questionModal .question-body").html(question.q)
   $("#questionModal").modal("toggle")
 
+answerQuestion = (catNum, qNum) ->
+  qDiv = $(".question-body")
+  qDiv.removeClass("answer-body")
+  tileDiv = $('.question[data-category-id="' + catNum + '"][data-question-id="' + qNum + '"]')
+  tileDiv.toggleClass("answered")
+  $.ajax("/answer/" + catNum + "/" + qNum)
+
 handleModalClick = (ev) ->
   qDiv = $(".question-body")
-  catNum = parseInt($(".question-body").data("category-id"))
-  qNum = parseInt($(".question-body").data("question-id"))
+  catNum = parseInt(qDiv.data("category-id"))
+  qNum = parseInt(qDiv.data("question-id"))
   if qDiv.hasClass("answer-body")
-    qDiv.removeClass("answer-body")
-    tileDiv = $('.question[data-category-id="' + catNum + '"][data-question-id="' + qNum + '"]')
-    tileDiv.toggleClass("answered")
-    $.ajax("/answer/" + catNum + "/" + qNum)
+    answerQuestion(catNum, qNum)
     $("#questionModal").modal("hide")
   else
     question = window.board_data[catNum].questions[qNum]
@@ -28,6 +33,9 @@ $ ->
   $("#content .question").click ->
     catNum = parseInt($(this).data("category-id"))
     qNum = parseInt($(this).data("question-id"))
-    showQuestion(catNum, qNum)
+    if $(this).hasClass("answered")
+      answerQuestion(catNum, qNum)
+    else
+      showQuestion(catNum, qNum)
 
   $("#questionModal").click handleModalClick

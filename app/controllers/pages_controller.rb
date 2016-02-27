@@ -8,7 +8,8 @@ class PagesController < ApplicationController
   def answer
     @board = Board.first
     @board_data = @board.data['categories']
-    @board_data[params[:cat_num].to_i]["questions"][params[:q_num].to_i]["ans"] = "answered"
+    q = @board_data[params[:cat_num].to_i]["questions"][params[:q_num].to_i]
+    q["ans"] = (q["ans"] == "answered") ? nil : "answered"
     @board.save!
     render text: "ok"
   end
@@ -60,7 +61,7 @@ class PagesController < ApplicationController
       end
     end
 
-    params["answered"] ||= {} 
+    params["answered"] ||= {}
     params["answered"].keys.each do |cat_num|
       cat = @board.data["categories"][cat_num.to_i]
       params["answered"][cat_num].keys.each do |q_num|
