@@ -42,11 +42,11 @@
   text-align: center;
 
   .menu {
-    float: right;
+      float: right;
   }
 }
 
-#content {
+#content, #editor {
   min-height: 100%;
 
   #board {
@@ -85,5 +85,21 @@
       }
     }
   }
+}
 
+.category-form {
+  margin: 10px;
+  border-bottom: 2px solid;
+}
+
+.question-form * {
+  vertical-align: middle;
+}
+.question-form {
+  label {
+    margin: 5px 10px;
+    input {
+      width: 40px;
+    }
+  }
 }

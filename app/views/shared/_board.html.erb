@@ -1,0 +1,10 @@
+<div id="board">
+    <% @board_data.each_with_index do |category, c_idx| %>
+      <div class="column">
+        <div class="category" data-category-id="<%= c_idx %>"><%= category["name"] %></div>
+        <% category["questions"].each_with_index do |question, q_idx| %>
+          <div class="question <%=question["ans"] if question["ans"]%>" data-category-id="<%= c_idx %>" data-question-id="<%= q_idx %>">$ <%= question["value"] %></div>
+        <% end %>
+      </div>
+    <% end %>
+</div>

@@ -1,0 +1,30 @@
+<%= form_tag("/save", id: "quizboard", method: "post") do %>
+<div id="header">
+  <span class="title">
+    <input id=title name=title type=text value='<%=@board.name%>' required>
+  </span>
+  <span class="menu">
+    <input type="submit" value="Finish Editing">
+  </span>
+</div>
+<div id="editor">
+    <% @board_data.each_with_index do |category, c_idx| %>
+      <div class='category-form'>
+        <input name=categories[<%= c_idx %>] type=text value='<%=category["name"]%>'>
+        <% category["questions"].each_with_index do |question, q_idx| %>
+        <p class='question-form'>
+          <label for='values[<%= c_idx %>][<%= q_idx %>]'>$
+            <input name='values[<%= c_idx %>][<%= q_idx %>]' type=text value='<%= question["value"] %>'>
+          </label>
+          <textarea name='questions[<%= c_idx %>][<%= q_idx %>]' rows="1" cols="50"><%= question["q"] %></textarea>
+          <textarea name='answers[<%= c_idx %>][<%= q_idx %>]' rows="1" cols="30"><%= question["a"] %></textarea>
+          <label>
+            <input type="checkbox" name='answered[<%= c_idx %>][<%= q_idx %>]' value="true" <%= "checked" if question["ans"]%>/>
+            Answered?
+          </label>
+        </p>
+        <% end %>
+      </div>
+    <% end %>
+</div>
+<% end %>
