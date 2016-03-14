@@ -61,6 +61,11 @@ class PagesController < ApplicationController
       end
     end
 
+    @board.data["categories"].each do |cat|
+      cat["questions"].each do |q_data|
+        q_data.delete "ans"
+      end
+    end
     params["answered"] ||= {}
     params["answered"].keys.each do |cat_num|
       cat = @board.data["categories"][cat_num.to_i]
