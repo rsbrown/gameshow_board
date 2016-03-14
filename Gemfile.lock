@@ -166,7 +166,7 @@ DEPENDENCIES
   jquery-turbolinks
   pg
   puma
-  rails (>= 5.0.0.beta1.3, < 5.1)
+  rails (>= 5.0.0.beta1.3)
   rails_12factor
   sass-rails
   spring
