@@ -31,6 +31,28 @@ class PagesController < ApplicationController
     @board_data = @board.data['categories']
   end
 
+  def add_cat
+    @board = Board.first
+    new_col = {
+      "name"=>"New Category",
+      "questions"=>[{"value"=>"10",  "q"=>"Question?", "a"=>"Answer."},
+                    {"value"=>"20",  "q"=>"Question?", "a"=>"Answer."},
+                    {"value"=>"50",  "q"=>"Question?", "a"=>"Answer."},
+                    {"value"=>"75",  "q"=>"Question?", "a"=>"Answer."},
+                    {"value"=>"100", "q"=>"Question?", "a"=>"Answer."}]
+    }
+    @board.data['categories'].push(new_col)
+    @board.save!
+    redirect_to "/edit#category_#{@board.data['categories'].length-1}"
+  end
+
+  def del_cat
+    @board = Board.first
+    @board.data['categories'].delete_at(params["cat_num"].to_i)
+    @board.save!
+    redirect_to "/edit"
+  end
+
   def save
     @board = Board.first
     @board['name'] = params["title"]

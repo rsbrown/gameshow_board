@@ -29,6 +29,13 @@ handleModalClick = (ev) ->
     qDiv.html(question.a)
     qDiv.addClass("answer-body")
 
+handleDelCatClick = (ev) ->
+  ev.preventDefault()
+  r = confirm("Delete this category?")
+  if r
+    window.location.href = $(this).attr('href');
+
+
 $ ->
   $("#content .question").click ->
     catNum = parseInt($(this).data("category-id"))
@@ -39,3 +46,5 @@ $ ->
       showQuestion(catNum, qNum)
 
   $("#questionModal").click handleModalClick
+  
+  $(".del-cat-btn").click handleDelCatClick

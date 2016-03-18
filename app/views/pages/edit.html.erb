@@ -9,10 +9,11 @@
 </div>
 <div id="editor">
     <% @board_data.each_with_index do |category, c_idx| %>
-      <div class='category-form'>
+      <div id="category_<%=c_idx%>" class='category-form'>
         <input class="edit-category-name" name=categories[<%= c_idx %>] type=text value='<%=category["name"]%>'>
+        <a class="del-cat-btn" href="/del_cat/<%=c_idx%>">delete</a>
         <% category["questions"].each_with_index do |question, q_idx| %>
-        <p class='question-form'>
+        <div class='question-form'>
           <label for='values[<%= c_idx %>][<%= q_idx %>]'>$
             <input name='values[<%= c_idx %>][<%= q_idx %>]' type=text value='<%= question["value"] %>'>
           </label>
@@ -22,9 +23,10 @@
             <input type="checkbox" name='answered[<%= c_idx %>][<%= q_idx %>]' value="true" <%= "checked" if question["ans"]%>/>
             Answered?
           </label>
-        </p>
+        </div>
         <% end %>
       </div>
     <% end %>
+    <a class="add-cat-btn" href="/add_column">Add New Category</a>
 </div>
 <% end %>
